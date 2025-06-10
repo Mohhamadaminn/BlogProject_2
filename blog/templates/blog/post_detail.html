@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <main>
+        <div class="post">
+            <h2>{{ object.author }}</h2>
+            <p><strong>Date:</strong> {{ object.updated_at }}</p>
+            <p><strong>Title:</strong> {{ object.title }}</p>
+            <p>{{ object.content }}</p>
+        </div>
+        <a href="{% url 'post_update' slug=post.slug %}">Edit</a>
+        <a href="{% url 'post_delete' slug=post.slug %}">Delete</a>
+    </main>
+{% endblock content %}

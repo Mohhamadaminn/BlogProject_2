@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock title %}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .auth-buttons {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+
+    .auth-buttons button {
+      background-color: #ffffff;
+      color: #333;
+      border: none;
+      padding: 8px 12px;
+      margin-left: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .auth-buttons button:hover {
+      background-color: #ddd;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .post {
+      background-color: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+    <header style="background-color: #333; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+  
+        <!-- Left side: Blog title -->
+        <div>
+          <h1 style="margin: 0;">My Blog</h1>
+          <p style="margin: 0;">Sharing my thoughts</p>
+        </div>
+      
+        <!-- Right side: Auth controls -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}!</span>
+            <form action="{% url 'logout' %}" method="POST" style="margin: 0;">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+            </form>
+          {% else %}
+            <button><a style="text-decoration: none;" href="{% url 'login' %}">Login</a></button>
+            <button><a style="text-decoration: none;" href="{% url 'signup' %}">SignUp</a></button>
+          {% endif %}
+        </div>
+      
+    </header>
+
+    {% block content %}{% endblock content %}
+
+    <footer>
+        <p>&copy; 202

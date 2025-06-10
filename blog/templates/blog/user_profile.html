@@ -1,0 +1,47 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="profile-container">
+    <h1>{{ profile_user.username }}'s Profile</h1>
+
+    <div class="profile-info">
+        {% if profile_user.profile.avatar %}
+            <img src="{{ profile_user.profile.avatar.url }}" alt="Avatar" width="120" height="120" style="border-radius: 50%;">
+        {% else %}
+            <img src="{% static 'default-avatar.png' %}" alt="Default Avatar" width="120" height="120" style="border-radius: 50%;">
+        {% endif %}
+
+
+        <p><strong>Bio:</strong> {{ profile_user.profile.bio|default:"No bio provided." }}</p>
+
+        {% if profile_user.profile.website %}
+            <p><strong>Website:</strong> 
+                <a href="{{ profile_user.profile.website }}" target="_blank">
+                    {{ profile_user.profile.website }}
+                </a>
+            </p>
+        {% endif %}
+
+        {% if request.user == profile_user %}
+            <p><a href="{% url 'edit_profile' %}">Edit Profile</a></p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <h2>Published Posts</h2>
+    {% if posts %}
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a>
+                    <small> - {{ post.created_at|date:"Y/m/d" }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>This user has not published any posts yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

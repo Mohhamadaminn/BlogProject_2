@@ -3,8 +3,8 @@
 {% block content %}
     <main>
         <div class="post">
-            <h2>{{ object.author }}</h2>
-            <p><strong>Date:</strong> {{ object.updated_at }}</p>
+            <h2>Author: {{ object.author }}</h2>
+            <p><strong>Date Created:</strong> {{ object.created_at }}</p>
             <p><strong>Title:</strong> {{ object.title }}</p>
             <p>{{ object.content }}</p>
         </div>

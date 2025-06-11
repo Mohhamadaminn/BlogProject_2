@@ -76,6 +76,9 @@
         <div style="display: flex; align-items: center; gap: 10px;">
           {% if user.is_authenticated %}
             <span>Welcome, {{ user.username }}!</span>
+            <a href="{% url 'post_create' %}">
+              <button type="button">Create Post</button>
+            </a>
             <form action="{% url 'logout' %}" method="POST" style="margin: 0;">
               {% csrf_token %}
               <button type="submit">Logout</button>

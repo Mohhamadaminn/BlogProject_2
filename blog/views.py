@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views import generic
-from blog.forms import ProfileForm
+from blog.forms import ProfileForm, PostForm
 from django.contrib.auth.decorators import login_required
 from .models import Post, Profile
 from django.urls import reverse_lazy
@@ -57,11 +57,16 @@ class PostDetailView(generic.DetailView):
 
 class PostCreateView(generic.CreateView):
     model = Post
-    fields = ['title', 'content', 'author',]
+    form_class = PostForm
     template_name_suffix = "_create_form"
 
     def get_success_url(self):
         return reverse_lazy('posts_list')
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
     
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):

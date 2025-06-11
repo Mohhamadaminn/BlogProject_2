@@ -2,7 +2,7 @@
 
 A simple blog web application built with Django.
 
-## Features
+## ✨ Features
 
 - User registration and login
 - User access management (permissions)

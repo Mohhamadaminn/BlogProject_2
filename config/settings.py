@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Packages
     'crispy_forms',
     'crispy_bootstrap5',
+    'widget_tweaks',
 
 
     # MyApps

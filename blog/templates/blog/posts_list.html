@@ -9,6 +9,7 @@
             <p><strong>Last Updated: </strong>{{ post.updated_at }}</p>
             <p>{{ post.content|truncatewords:2 }}</p>
             <p><a style="text-decoration: none" href="{% url 'post_detail' slug=post.slug %}">Read More</a></p>
+            <p><a style="text-decoration: none" href="{% url 'user_profile' username=post.author %}">Visit {{post.author}}'s Profile</a></p>
           </div>
     {% endfor %}
 </main>
